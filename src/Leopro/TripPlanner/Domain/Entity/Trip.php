@@ -21,19 +21,9 @@ class Trip
     public static function create(TripIdentity $identity, $name)
     {
         $trip = new self($identity, $name);
-        $trip->routes->add(Route::createFirst($trip));
+        $trip->routes->add(Route::create($trip->name));
 
         return $trip;
-    }
-
-    public function getIdentity()
-    {
-        return $this->identity;
-    }
-
-    public function getName()
-    {
-        return $this->name;
     }
 
     public function getRoutes()

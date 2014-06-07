@@ -14,6 +14,5 @@ class TripTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $trip->getRoutes()->count());
         $this->assertInstanceOf('Leopro\TripPlanner\Domain\Entity\Route', $trip->getRoutes()->first());
         $this->assertEquals('first route for trip: my first planning', $trip->getRoutes()->first()->getName());
-        $this->assertEquals(new TripIdentity(1), $trip->getRoutes()->first()->getTripIdentity());
     }
 } 

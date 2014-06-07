@@ -2,36 +2,51 @@
 
 namespace Leopro\TripPlanner\Domain\Entity;
 
+use Leopro\TripPlanner\Domain\Adapter\ArrayCollection;
 use Leopro\TripPlanner\Domain\ValueObject\InternalIdentity;
-use Leopro\TripPlanner\Domain\ValueObject\TripIdentity;
 
 class Route
 {
-    private $tripIdentity;
     private $internalIdentity;
     private $name;
+    private $legs;
 
-    private function __construct(TripIdentity $tripIdentity,
-                                 InternalIdentity $internalIdentity,
+    private function __construct(InternalIdentity $internalIdentity,
                                  $name)
     {
-        $this->tripIdentity = $tripIdentity;
         $this->internalIdentity = $internalIdentity;
         $this->name = $name;
+        $this->legs = new ArrayCollection();
     }
 
-    public static function createFirst(Trip $trip)
+    public static function create($tripName)
     {
-        return new self($trip->getIdentity(), new InternalIdentity, 'first route for trip: ' . $trip->getName());
+        return new self(
+            new InternalIdentity,
+            'first route for trip: ' . $tripName
+        );
+    }
+
+    public function addLeg($date)
+    {
+        $leg = Leg::create($date);
+
+        $checker = function($key, $element) use($leg) {
+            return $element->getDate() == $leg->getDate();
+        };
+
+        if (!$this->legs->exists($checker)) {
+            $this->legs->add($leg);
+        }
+    }
+
+    public function getLegs()
+    {
+        return $this->legs;
     }
 
     public function getName()
     {
         return $this->name;
-    }
-
-    public function getTripIdentity()
-    {
-        return $this->tripIdentity;
     }
 } 

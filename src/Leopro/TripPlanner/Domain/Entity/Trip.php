@@ -3,12 +3,17 @@
 namespace Leopro\TripPlanner\Domain\Entity;
 
 use Leopro\TripPlanner\Domain\Adapter\ArrayCollection;
+use Leopro\TripPlanner\Domain\Exception\ResourceNotFoundException;
 use Leopro\TripPlanner\Domain\ValueObject\TripIdentity;
 
 class Trip
 {
     private $identity;
     private $name;
+
+    /**
+     * @var \Leopro\TripPlanner\Domain\Entity\Route[]
+     */
     private $routes;
 
     private function __construct(TripIdentity $identity, $name)
@@ -38,6 +43,8 @@ class Trip
                 return $route;
             }
         }
+
+        throw new ResourceNotFoundException(sprintf('Route with identity \'%s\' not found', $routeId));
     }
 
     public function duplicateRoute($routeId)

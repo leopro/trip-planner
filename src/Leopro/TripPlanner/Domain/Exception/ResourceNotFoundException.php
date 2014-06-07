@@ -2,7 +2,7 @@
 
 namespace Leopro\TripPlanner\Domain\Exception;
 
-class DateAlreadyUsedException extends DomainException
+class ResourceNotFoundException extends DomainException
 {
 
 } 

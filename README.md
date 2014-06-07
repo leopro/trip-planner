@@ -20,3 +20,4 @@ Application
 - Command Handler: manages the flow "Command -> Use Case"
 - CreateTrip Command and UseCase
 - We need the Repository for Trip
+- AddLegToRoute Command and UseCase

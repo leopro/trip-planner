@@ -10,6 +10,10 @@ class Route
 {
     private $internalIdentity;
     private $name;
+
+    /**
+     * @var \Leopro\TripPlanner\Domain\Entity\Leg[]
+     */
     private $legs;
 
     private function __construct(InternalIdentity $internalIdentity,
@@ -28,9 +32,9 @@ class Route
         );
     }
 
-    public function addLeg($date, $latitude, $longitude)
+    public function addLeg($date, $latitude, $longitude, $dateFormat = 'd-m-Y')
     {
-        $leg = Leg::create($date, 'd-m-Y', $latitude, $longitude);
+        $leg = Leg::create($date, $dateFormat, $latitude, $longitude);
 
         $dateAlreadyUsed = function($key, $element) use($leg) {
             return $element->getDate() == $leg->getDate();
@@ -41,21 +45,6 @@ class Route
         }
 
         $this->legs->add($leg);
-    }
-
-    public function getLegs()
-    {
-        return $this->legs;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function getInternalIdentity()
-    {
-        return $this->internalIdentity;
     }
 
     public function getApproximateRoadDistance()
@@ -83,5 +72,20 @@ class Route
     public function duplicate()
     {
         return clone $this;
+    }
+
+    public function getLegs()
+    {
+        return $this->legs;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getInternalIdentity()
+    {
+        return $this->internalIdentity;
     }
 } 

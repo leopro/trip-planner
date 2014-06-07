@@ -52,4 +52,26 @@ class Route
     {
         return $this->name;
     }
+
+    public function getApproximateRoadDistance()
+    {
+        $distance = 0;
+        $iterator = $this->legs->getIterator();
+
+        while($iterator->valid()) {
+
+            $pointFrom = $iterator->current()->getLocation()->getPoint();
+
+            $iterator->next();
+            if (!$iterator->valid()) {
+                break;
+            }
+
+            $pointTo = $iterator->current()->getLocation()->getPoint();
+
+            $distance += $pointFrom->getApproximateRoadDistance($pointTo);
+        }
+
+        return $distance;
+    }
 } 

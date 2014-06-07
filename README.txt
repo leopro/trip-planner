@@ -7,3 +7,4 @@ Trip Planner
 - A Route can't have two Leg with same Data
 - A Leg has a Location; a Location has a name and a Point
 - Point has coordinates and the logic for distance calculation
+- The Route knows the approximate road distance

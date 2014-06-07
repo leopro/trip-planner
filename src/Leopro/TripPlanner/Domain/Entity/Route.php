@@ -53,6 +53,11 @@ class Route
         return $this->name;
     }
 
+    public function getInternalIdentity()
+    {
+        return $this->internalIdentity;
+    }
+
     public function getApproximateRoadDistance()
     {
         $distance = 0;
@@ -73,5 +78,10 @@ class Route
         }
 
         return $distance;
+    }
+
+    public function duplicate()
+    {
+        return clone $this;
     }
 } 

@@ -8,3 +8,5 @@ Trip Planner
 - A Leg has a Location; a Location has a name and a Point
 - Point has coordinates and the logic for distance calculation
 - The Route knows the approximate road distance
+- A route could be duplicated
+- A duplicated Route could be added to the Trip

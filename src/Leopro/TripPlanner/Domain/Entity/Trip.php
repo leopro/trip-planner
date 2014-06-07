@@ -30,4 +30,19 @@ class Trip
     {
         return $this->routes;
     }
+
+    public function getRoute($routeId)
+    {
+        foreach ($this->routes as $route) {
+            if ($routeId == $route->getInternalIdentity()->getId()) {
+                return $route;
+            }
+        }
+    }
+
+    public function duplicateRoute($routeId)
+    {
+        $route = $this->getRoute($routeId);
+        $this->routes->add($route->duplicate());
+    }
 } 

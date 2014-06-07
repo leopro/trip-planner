@@ -44,4 +44,14 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(150, $distance);
     }
+
+    public function testRouteCouldBeDuplicated()
+    {
+        $route = Route::create('my first trip');
+        $routeDuplicated = $route->duplicate();
+
+        $comparison = $route === $routeDuplicated;
+
+        $this->assertFalse($comparison);
+    }
 } 

@@ -9,25 +9,34 @@ class Leg
 {
     private $internalIdentity;
     private $date;
+    private $location;
 
     private function __construct(InternalIdentity $internalIdentity,
-                                 Date $date)
+                                 Date $date,
+                                 Location $location)
     {
         $this->internalIdentity = $internalIdentity;
         $this->date = $date;
+        $this->location = $location;
     }
 
-    public static function create($date)
+    public static function create($date, $dateFormat, $latitude, $longitude)
     {
-        $date = new Date($date, 'd-m-Y');
+        $date = new Date($date, $dateFormat);
         return new self(
             new InternalIdentity,
-            $date
+            $date,
+            Location::create($date->getFormattedDate(), $latitude, $longitude)
         );
     }
 
     public function getDate()
     {
         return $this->date;
+    }
+
+    public function getLocation()
+    {
+        return $this->location;
     }
 } 

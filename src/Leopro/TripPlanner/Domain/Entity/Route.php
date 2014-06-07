@@ -3,6 +3,7 @@
 namespace Leopro\TripPlanner\Domain\Entity;
 
 use Leopro\TripPlanner\Domain\Adapter\ArrayCollection;
+use Leopro\TripPlanner\Domain\Exception\DateAlreadyUsedException;
 use Leopro\TripPlanner\Domain\ValueObject\InternalIdentity;
 
 class Route
@@ -27,17 +28,19 @@ class Route
         );
     }
 
-    public function addLeg($date)
+    public function addLeg($date, $latitude, $longitude)
     {
-        $leg = Leg::create($date);
+        $leg = Leg::create($date, 'd-m-Y', $latitude, $longitude);
 
-        $checker = function($key, $element) use($leg) {
+        $dateAlreadyUsed = function($key, $element) use($leg) {
             return $element->getDate() == $leg->getDate();
         };
 
-        if (!$this->legs->exists($checker)) {
-            $this->legs->add($leg);
+        if ($this->legs->exists($dateAlreadyUsed)) {
+            throw new DateAlreadyUsedException($date . ' already used');
         }
+
+        $this->legs->add($leg);
     }
 
     public function getLegs()

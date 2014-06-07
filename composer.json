@@ -1,0 +1,16 @@
+{
+    "name": "trip planner",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "doctrine/collections": "v1.2"
+    },
+    "require-dev": {
+      "phpunit/phpunit": "3.7.*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}

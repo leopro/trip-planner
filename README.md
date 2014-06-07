@@ -18,3 +18,4 @@ Application
 ========================
 
 - Command Handler: manages the flow "Command -> Use Case"
+- CreateTrip Command and UseCase

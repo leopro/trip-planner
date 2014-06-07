@@ -2,7 +2,7 @@
 
 namespace Leopro\TripPlanner\Application\Command;
 
-use Leopro\TripPlanner\Application\UseCase\UseCaseInterface;
+use Leopro\TripPlanner\Application\Contract\UseCaseInterface;
 
 class CommandHandler
 {
@@ -24,16 +24,20 @@ class CommandHandler
 
     public function execute($command)
     {
+        $this->exceptionIfCommandNotManaged($command);
+
         try {
-
-            $commandClass = get_class($command);
-            if (!array_key_exists($commandClass, $this->useCases)) {
-                throw new \LogicException($commandClass . ' is not a managed command');
-            }
-
             $this->useCases[get_class($command)]->run($command);
         } catch (\Exception $e) {
             throw $e;
+        }
+    }
+
+    private function exceptionIfCommandNotManaged($command)
+    {
+        $commandClass = get_class($command);
+        if (!array_key_exists($commandClass, $this->useCases)) {
+            throw new \LogicException($commandClass . ' is not a managed command');
         }
     }
 } 

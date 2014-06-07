@@ -1,15 +1,15 @@
 <?php
 
-namespace Leopro\TripPlanner\Domain\Tests;
+namespace Leopro\TripPlanner\Application\Tests;
 
 use Leopro\TripPlanner\Application\Command\CommandHandler;
-use Leopro\TripPlanner\Application\Command\CommandInterface;
+use Leopro\TripPlanner\Application\Contract\CommandInterface;
 
 class CommandHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->useCase = $this->getMockBuilder('Leopro\TripPlanner\Application\UseCase\UseCaseInterface')
+        $this->useCase = $this->getMockBuilder('Leopro\TripPlanner\Application\Contract\UseCaseInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -39,7 +39,7 @@ class CommandHandlerTest extends \PHPUnit_Framework_TestCase
         $this->useCase
             ->expects($this->once())
             ->method('getManagedCommand')
-            ->will($this->returnValue('Leopro\TripPlanner\Domain\Tests\Fake'));
+            ->will($this->returnValue('Leopro\TripPlanner\Application\Tests\Fake'));
 
         $this->useCase
             ->expects($this->once())

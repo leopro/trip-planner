@@ -4,11 +4,19 @@ namespace Leopro\TripPlanner\Application\UseCase;
 
 use Leopro\TripPlanner\Application\Contract\CommandInterface;
 use Leopro\TripPlanner\Application\Contract\UseCaseInterface;
+use Leopro\TripPlanner\Domain\Contract\TripRepository;
 use Leopro\TripPlanner\Domain\Entity\Trip;
 use Leopro\TripPlanner\Domain\ValueObject\TripIdentity;
 
 class CreateTripUseCase extends AbstractUseCase implements UseCaseInterface
 {
+    private $tripRepository;
+
+    public function __construct(TripRepository $tripRepository)
+    {
+        $this->tripRepository = $tripRepository;
+    }
+
     public function getManagedCommand()
     {
         return 'Leopro\TripPlanner\Application\Command\CreateTripCommand';
@@ -19,8 +27,14 @@ class CreateTripUseCase extends AbstractUseCase implements UseCaseInterface
         $this->exceptionIfCommandNotManaged($command);
 
         $request = $command->getRequest();
-        $tripIdentity = new TripIdentity(uniqid());
 
-        return Trip::create($tripIdentity, $request->get('name'));
+        $trip = Trip::createWithFirstRoute(
+            new TripIdentity(uniqid()),
+            $request->get('name')
+        );
+
+        $this->tripRepository->add($trip);
+
+        return $trip;
     }
 } 

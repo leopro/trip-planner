@@ -9,7 +9,7 @@ class TripTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateTripReturnsATripWithFirstRoute()
     {
-        $trip = Trip::create(new TripIdentity(1), 'my first planning');
+        $trip = Trip::createWithFirstRoute(new TripIdentity(1), 'my first planning');
         $this->assertInstanceOf('Leopro\TripPlanner\Domain\Entity\Trip', $trip);
         $this->assertEquals(1, $trip->getRoutes()->count());
         $this->assertInstanceOf('Leopro\TripPlanner\Domain\Entity\Route', $trip->getRoutes()->first());
@@ -18,7 +18,7 @@ class TripTest extends \PHPUnit_Framework_TestCase
 
     public function testADuplicatedRouteCouldBeAdded()
     {
-        $trip = Trip::create(new TripIdentity(1), 'my first planning');
+        $trip = Trip::createWithFirstRoute(new TripIdentity(1), 'my first planning');
         $trip->duplicateRoute(null);
         $this->assertEquals(2, $trip->getRoutes()->count());
     }

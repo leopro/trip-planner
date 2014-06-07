@@ -18,7 +18,7 @@ class Trip
         $this->routes = new ArrayCollection();
     }
 
-    public static function create(TripIdentity $identity, $name)
+    public static function createWithFirstRoute(TripIdentity $identity, $name)
     {
         $trip = new self($identity, $name);
         $trip->routes->add(Route::create($trip->name));

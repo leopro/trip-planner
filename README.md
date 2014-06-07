@@ -21,3 +21,4 @@ Application
 - CreateTrip Command and UseCase
 - We need the Repository for Trip
 - AddLegToRoute Command and UseCase
+- UpdateLocation Command and UseCase

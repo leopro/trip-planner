@@ -29,8 +29,18 @@ class Location
         );
     }
 
+    public function updateName($name)
+    {
+        $this->name = $name;
+    }
+
     public function getPoint()
     {
         return $this->point;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 } 

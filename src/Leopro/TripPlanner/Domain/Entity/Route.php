@@ -4,6 +4,8 @@ namespace Leopro\TripPlanner\Domain\Entity;
 
 use Leopro\TripPlanner\Domain\Adapter\ArrayCollection;
 use Leopro\TripPlanner\Domain\Exception\DateAlreadyUsedException;
+use Leopro\TripPlanner\Domain\Exception\ResourceNotFoundException;
+use Leopro\TripPlanner\Domain\ValueObject\Date;
 use Leopro\TripPlanner\Domain\ValueObject\InternalIdentity;
 
 class Route
@@ -72,6 +74,18 @@ class Route
     public function duplicate()
     {
         return clone $this;
+    }
+
+    public function getLegByDate($date)
+    {
+        foreach ($this->legs as $leg) {
+            $legDate = $leg->getDate()->getFormattedDate();
+            if ($legDate == $date) {
+                return $leg;
+            }
+        }
+
+        throw new ResourceNotFoundException(sprintf('Leg with date \'%s\' not found', $date));
     }
 
     public function getLegs()

@@ -13,8 +13,12 @@ class Date
         $this->format = $format;
     }
 
-    public function getFormattedDate($format = 'Y-m-d')
+    public function getFormattedDate($format = null)
     {
+        if (!$format) {
+            $format = $this->format;
+        }
+
         $date = \DateTime::createFromFormat($this->format, $this->input);
         $formattedDate = $date->format($format);
 

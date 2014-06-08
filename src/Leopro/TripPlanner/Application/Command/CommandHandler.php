@@ -5,6 +5,8 @@ namespace Leopro\TripPlanner\Application\Command;
 use Leopro\TripPlanner\Application\Contract\UseCase;
 use Leopro\TripPlanner\Application\Contract\Validator;
 use Leopro\TripPlanner\Application\Exception\ValidationException;
+use Leopro\TripPlanner\Application\Response\Response;
+use Leopro\TripPlanner\Domain\Exception\DomainException;
 
 class CommandHandler
 {
@@ -35,15 +37,21 @@ class CommandHandler
     {
         $this->exceptionIfCommandNotManaged($command);
 
-        $errors = $this->validator->validate($command);
-        if ($errors->count() > 0) {
-            throw new ValidationException($errors);
-        }
-
         try {
-            $this->useCases[get_class($command)]->run($command);
-        } catch (\DomainException $e) {
-            throw $e;
+
+            $errors = $this->validator->validate($command);
+            if ($errors->count() > 0) {
+                throw new ValidationException($errors);
+            }
+
+            $result = $this->useCases[get_class($command)]->run($command);
+
+            return new Response($result);
+
+        } catch (DomainException $e) {
+            return new Response($e->getMessage());
+        } catch (ValidationException $e) {
+            return new Response($errors);
         }
     }
 

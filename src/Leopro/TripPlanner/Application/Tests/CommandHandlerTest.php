@@ -59,12 +59,10 @@ class CommandHandlerTest extends \PHPUnit_Framework_TestCase
            $this->useCase
         ));
 
-        $this->commandHandler->execute(new Fake());
+        $result = $this->commandHandler->execute(new Fake());
+        $this->assertInstanceOf('Leopro\TripPlanner\Application\Response\Response', $result);
     }
 
-    /**
-     * @expectedException \Leopro\TripPlanner\Application\Exception\ValidationException
-     */
     public function testCommandValidation()
     {
         $this->validator
@@ -81,7 +79,9 @@ class CommandHandlerTest extends \PHPUnit_Framework_TestCase
            $this->useCase
         ));
 
-        $this->commandHandler->execute(new Fake());
+        $response = $this->commandHandler->execute(new Fake());
+        $errors = $response->getContent();
+        $this->assertEquals('This value should not be blank', $errors->get('name'));
     }
 }
 

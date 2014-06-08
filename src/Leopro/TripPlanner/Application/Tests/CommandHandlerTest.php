@@ -18,7 +18,11 @@ class CommandHandlerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->commandHandler = new CommandHandler($this->validator);
+        $this->eventDispatcher = $this->getMockBuilder('Leopro\TripPlanner\Application\Contract\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->commandHandler = new CommandHandler($this->validator, $this->eventDispatcher);
     }
 
     public function testRegisterCommandsWithCorrectInterface()

@@ -24,3 +24,4 @@ Application
 - UpdateLocation Command and UseCase
 - We need validation: command validation using external service is a good trade-off
 - Mmmh too many exceptions ... we need uniform responses
+- Finally Events and Event Dispatcher

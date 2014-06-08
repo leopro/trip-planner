@@ -22,3 +22,4 @@ Application
 - We need the Repository for Trip
 - AddLegToRoute Command and UseCase
 - UpdateLocation Command and UseCase
+- We need validation: command validation using external service is a good trade-off

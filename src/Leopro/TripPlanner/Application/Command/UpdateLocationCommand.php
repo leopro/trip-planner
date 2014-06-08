@@ -2,10 +2,10 @@
 
 namespace Leopro\TripPlanner\Application\Command;
 
-use Leopro\TripPlanner\Application\Contract\CommandInterface;
+use Leopro\TripPlanner\Application\Contract\Command;
 use Leopro\TripPlanner\Domain\Adapter\ArrayCollection;
 
-class UpdateLocationCommand implements CommandInterface
+class UpdateLocationCommand implements Command
 {
     private $routeIdentity;
     private $date;

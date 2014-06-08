@@ -2,13 +2,13 @@
 
 namespace Leopro\TripPlanner\Application\UseCase;
 
-use Leopro\TripPlanner\Application\Contract\CommandInterface;
-use Leopro\TripPlanner\Application\Contract\UseCaseInterface;
+use Leopro\TripPlanner\Application\Contract\Command;
+use Leopro\TripPlanner\Application\Contract\UseCase;
 use Leopro\TripPlanner\Domain\Contract\TripRepository;
 use Leopro\TripPlanner\Domain\Entity\Trip;
 use Leopro\TripPlanner\Domain\ValueObject\TripIdentity;
 
-class CreateTripUseCase extends AbstractUseCase implements UseCaseInterface
+class CreateTripUseCase extends AbstractUseCase implements UseCase
 {
     private $tripRepository;
 
@@ -22,7 +22,7 @@ class CreateTripUseCase extends AbstractUseCase implements UseCaseInterface
         return 'Leopro\TripPlanner\Application\Command\CreateTripCommand';
     }
 
-    public function run(CommandInterface $command)
+    public function run(Command $command)
     {
         $this->exceptionIfCommandNotManaged($command);
 

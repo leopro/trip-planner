@@ -5,7 +5,6 @@ namespace Leopro\TripPlanner\Domain\Entity;
 use Leopro\TripPlanner\Domain\Adapter\ArrayCollection;
 use Leopro\TripPlanner\Domain\Exception\DateAlreadyUsedException;
 use Leopro\TripPlanner\Domain\Exception\ResourceNotFoundException;
-use Leopro\TripPlanner\Domain\ValueObject\Date;
 use Leopro\TripPlanner\Domain\ValueObject\InternalIdentity;
 
 class Route

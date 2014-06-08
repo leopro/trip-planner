@@ -3,17 +3,22 @@
 namespace Leopro\TripPlanner\Application\Tests;
 
 use Leopro\TripPlanner\Application\Command\CommandHandler;
-use Leopro\TripPlanner\Application\Contract\CommandInterface;
+use Leopro\TripPlanner\Application\Contract\Command;
+use Leopro\TripPlanner\Domain\Adapter\ArrayCollection;
 
 class CommandHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->useCase = $this->getMockBuilder('Leopro\TripPlanner\Application\Contract\UseCaseInterface')
+        $this->useCase = $this->getMockBuilder('Leopro\TripPlanner\Application\Contract\UseCase')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->commandHandler = new CommandHandler();
+        $this->validator = $this->getMockBuilder('Leopro\TripPlanner\Application\Contract\Validator')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->commandHandler = new CommandHandler($this->validator);
     }
 
     public function testRegisterCommandsWithCorrectInterface()
@@ -41,6 +46,11 @@ class CommandHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('getManagedCommand')
             ->will($this->returnValue('Leopro\TripPlanner\Application\Tests\Fake'));
 
+        $this->validator
+            ->expects($this->once())
+            ->method('validate')
+            ->will($this->returnValue(new ArrayCollection()));
+
         $this->useCase
             ->expects($this->once())
             ->method('run');
@@ -51,9 +61,31 @@ class CommandHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->commandHandler->execute(new Fake());
     }
+
+    /**
+     * @expectedException \Leopro\TripPlanner\Application\Exception\ValidationException
+     */
+    public function testCommandValidation()
+    {
+        $this->validator
+            ->expects($this->once())
+            ->method('validate')
+            ->will($this->returnValue(new ArrayCollection(array('name' => 'This value should not be blank'))));
+
+        $this->useCase
+            ->expects($this->once())
+            ->method('getManagedCommand')
+            ->will($this->returnValue('Leopro\TripPlanner\Application\Tests\Fake'));
+
+        $this->commandHandler->registerCommands(array(
+           $this->useCase
+        ));
+
+        $this->commandHandler->execute(new Fake());
+    }
 }
 
-class Fake implements CommandInterface
+class Fake implements Command
 {
     public function getRequest()
     {

@@ -2,10 +2,10 @@
 
 namespace Leopro\TripPlanner\Application\Command;
 
-use Leopro\TripPlanner\Application\Contract\CommandInterface;
+use Leopro\TripPlanner\Application\Contract\Command;
 use Leopro\TripPlanner\Domain\Adapter\ArrayCollection;
 
-class AddLegToRouteCommand implements CommandInterface
+class AddLegToRouteCommand implements Command
 {
     private $tripIdentity;
     private $routeIdentity;

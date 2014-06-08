@@ -2,7 +2,7 @@
 
 namespace Leopro\TripPlanner\Application\Contract;
 
-interface UseCaseInterface
+interface UseCase
 {
     /**
      * @return string
@@ -10,8 +10,8 @@ interface UseCaseInterface
     public function getManagedCommand();
 
     /**
-     * @param CommandInterface $command
+     * @param Command $command
      * @return mixed
      */
-    public function run(CommandInterface $command);
+    public function run(Command $command);
 } 

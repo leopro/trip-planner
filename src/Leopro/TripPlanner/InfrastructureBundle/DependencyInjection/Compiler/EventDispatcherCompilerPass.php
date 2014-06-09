@@ -6,26 +6,26 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class CommandHandlerCompilerPass implements CompilerPassInterface
+class EventDispatcherCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('command_handler')) {
+        if (!$container->hasDefinition('application.event_dispatcher')) {
             return;
         }
 
-        $definition = $container->getDefinition('command_handler');
-        $taggedServices = $container->findTaggedServiceIds('use_case');
+        $definition = $container->getDefinition('application.event_dispatcher');
+        $taggedServices = $container->findTaggedServiceIds('event_dispatcher_listener');
 
-        $useCases = array();
+        $listeners = array();
 
         foreach ($taggedServices as $id => $attributes) {
-            $useCases[] = new Reference($id);
+            $listeners[] = new Reference($id);
         }
 
         $definition->addMethodCall(
-            'registerCommands',
-            array($useCases)
+            'registerListeners',
+            array($listeners)
         );
     }
 } 

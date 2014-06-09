@@ -3,5 +3,57 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="infrastructure.trip_repository.doctrine.class">Leopro\TripPlanner\InfrastructureBundle\Repository\TripRepository</parameter>
+        <parameter key="infrastructure.validator.class">Leopro\TripPlanner\InfrastructureBundle\Adapter\Validator</parameter>
+        <parameter key="application.event_dispatcher.class">Leopro\TripPlanner\Application\Event\EventDispatcher</parameter>
+        <parameter key="application.command_handler.class">Leopro\TripPlanner\Application\Command\CommandHandler</parameter>
+        <parameter key="infrastructure.event_dispatcher_adapter.class">Leopro\TripPlanner\InfrastructureBundle\Adapter\EventDispatcher</parameter>
+    </parameters>
 
+    <services>
+
+        <!-- Exposed Services -->
+        <service id="trip_repository" alias="trip_repository.doctrine"></service>
+
+        <service id="command_handler" class="%application.command_handler.class%">
+            <argument type="service" id="infrastructure.validator"/>
+            <argument type="service" id="application.event_dispatcher"/>
+        </service>
+
+        <!-- Not Exposed Services -->
+        <service id="application.event_dispatcher" public="false" class="%application.event_dispatcher.class%">
+        </service>
+
+        <service id="use_case.create_trip" public="false" class="Leopro\TripPlanner\Application\UseCase\CreateTripUseCase">
+            <argument type="service" id="trip_repository"/>
+            <tag name="use_case" />
+        </service>
+
+        <service id="use_case.add_leg_to_route" public="false" class="Leopro\TripPlanner\Application\UseCase\AddLegToRouteUseCase">
+            <argument type="service" id="trip_repository"/>
+            <tag name="use_case" />
+        </service>
+
+        <service id="use_case.update_location" public="false" class="Leopro\TripPlanner\Application\UseCase\UpdateLocationUseCase">
+            <argument type="service" id="trip_repository"/>
+            <tag name="use_case" />
+        </service>
+
+        <!-- Adapter -->
+        <service id="infrastructure.validator" public="false" class="%infrastructure.validator.class%">
+            <argument type="service" id="validator"/>
+        </service>
+
+        <service id="infrastructure.event_dispatcher_adapter" public="false" class="%infrastructure.event_dispatcher_adapter.class%">
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="event_dispatcher_listener" />
+        </service>
+
+        <!-- Concrete Implementations -->
+        <service id="trip_repository.doctrine" public="false" class="%infrastructure.trip_repository.doctrine.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+    </services>
 </container>

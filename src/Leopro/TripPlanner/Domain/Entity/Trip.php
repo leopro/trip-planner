@@ -52,4 +52,9 @@ class Trip
         $route = $this->getRoute($routeId);
         $this->routes->add($route->duplicate());
     }
+
+    public function getIdentity()
+    {
+        return $this->identity;
+    }
 } 

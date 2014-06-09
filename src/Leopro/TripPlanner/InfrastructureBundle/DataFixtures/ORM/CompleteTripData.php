@@ -12,7 +12,7 @@ class CompleteTripData extends AbstractFixture implements OrderedFixtureInterfac
 {
     public function load(ObjectManager $manager)
     {
-        $tripIdentity = new TripIdentity(uniqid());
+        $tripIdentity = new TripIdentity('abcd');
         $trip = Trip::createWithFirstRoute($tripIdentity, 'my complete trip');
 
         $route = $trip->getRoutes()->first();

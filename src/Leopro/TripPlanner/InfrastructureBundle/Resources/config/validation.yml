@@ -1,0 +1,28 @@
+Leopro\TripPlanner\Application\Command\CreateTripCommand:
+    properties:
+        name:
+            - NotBlank: ~
+
+Leopro\TripPlanner\Application\Command\AddLegToRouteCommand:
+    properties:
+        tripIdentity:
+            - NotBlank: ~
+        routeIdentity:
+            - NotBlank: ~
+        date:
+            - NotBlank: ~
+        dateFormat:
+            - NotBlank: ~
+        latitude:
+            - NotBlank: ~
+        longitude:
+            - NotBlank: ~
+
+Leopro\TripPlanner\Application\Command\UpdateLocationCommand:
+    properties:
+        routeIdentity:
+            - NotBlank: ~
+        date:
+            - NotBlank: ~
+        name:
+            - NotBlank: ~

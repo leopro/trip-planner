@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: /home/leonardo/dev/vhosts/trip-planner/app/config/routing_dev.yml

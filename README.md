@@ -25,3 +25,8 @@ Application
 - We need validation: command validation using external service is a good trade-off
 - Mmmh too many exceptions ... we need uniform responses
 - Finally Events and Event Dispatcher
+
+Infrastructure
+========================
+
+- Framework's revenge: Symfony 2.5 and Doctrine 2.5

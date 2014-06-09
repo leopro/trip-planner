@@ -1,2 +1,4 @@
 vendor
 bin
+app/logs/*
+app/cache/*

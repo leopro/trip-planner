@@ -22,6 +22,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
             array('2014-6-1', 'Y-m-d', 'Y-m-d', '2014-06-01'),
             array('1-6-2014', 'd-m-Y', 'Y-m-d', '2014-06-01'),
             array('2014-6-1', 'Y-m-d', 'd-m-Y', '01-06-2014'),
+            array('01/01/2014', 'd/m/Y', null, '01/01/2014'),
         );
     }
 } 

@@ -39,7 +39,7 @@ class Trip
     public function getRoute($routeId)
     {
         foreach ($this->routes as $route) {
-            if ($routeId == $route->getInternalIdentity()->getId()) {
+            if ($routeId == $route->getInternalIdentity()) {
                 return $route;
             }
         }

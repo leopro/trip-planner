@@ -1,0 +1,24 @@
+Leopro\TripPlanner\Domain\Entity\Route:
+    type: entity
+    table: route
+    id:
+        internalIdentity:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 250
+    manyToMany:
+        legs:
+            targetEntity: Leopro\TripPlanner\Domain\Entity\Leg
+            joinTable:
+              name: route_legs
+              joinColumns:
+                link_id:
+                  referencedColumnName: internalIdentity
+              inverseJoinColumns:
+                report_id:
+                  referencedColumnName: internalIdentity
+            cascade: ["persist"]

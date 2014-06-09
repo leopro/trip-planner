@@ -5,7 +5,6 @@ namespace Leopro\TripPlanner\Domain\Entity;
 use Leopro\TripPlanner\Domain\Adapter\ArrayCollection;
 use Leopro\TripPlanner\Domain\Exception\DateAlreadyUsedException;
 use Leopro\TripPlanner\Domain\Exception\ResourceNotFoundException;
-use Leopro\TripPlanner\Domain\ValueObject\InternalIdentity;
 
 class Route
 {
@@ -17,10 +16,8 @@ class Route
      */
     private $legs;
 
-    private function __construct(InternalIdentity $internalIdentity,
-                                 $name)
+    private function __construct($name)
     {
-        $this->internalIdentity = $internalIdentity;
         $this->name = $name;
         $this->legs = new ArrayCollection();
     }
@@ -28,7 +25,6 @@ class Route
     public static function create($tripName)
     {
         return new self(
-            new InternalIdentity,
             'first route for trip: ' . $tripName
         );
     }

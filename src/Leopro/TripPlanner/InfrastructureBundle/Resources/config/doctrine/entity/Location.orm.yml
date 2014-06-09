@@ -1,0 +1,15 @@
+Leopro\TripPlanner\Domain\Entity\Location:
+    type: entity
+    table: location
+    id:
+        internalIdentity:
+          type: integer
+          generator:
+            strategy: AUTO
+    embedded:
+        point:
+            class: Leopro\TripPlanner\Domain\ValueObject\Point
+    fields:
+        name:
+            type: string
+            length: 250

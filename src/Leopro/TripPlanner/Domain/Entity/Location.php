@@ -2,7 +2,6 @@
 
 namespace Leopro\TripPlanner\Domain\Entity;
 
-use Leopro\TripPlanner\Domain\ValueObject\InternalIdentity;
 use Leopro\TripPlanner\Domain\ValueObject\Point;
 
 class Location
@@ -11,11 +10,9 @@ class Location
     private $name;
     private $point;
 
-    private function __construct(InternalIdentity $internalIdentity,
-                                 $name,
+    private function __construct($name,
                                  Point $point)
     {
-        $this->internalIdentity = $internalIdentity;
         $this->name = $name;
         $this->point = $point;
     }
@@ -23,7 +20,6 @@ class Location
     public static function create($name, $latitude, $longitude)
     {
         return new self(
-            new InternalIdentity,
             $name,
             new Point($latitude, $longitude)
         );

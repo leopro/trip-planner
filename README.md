@@ -13,6 +13,8 @@ Domain
 - The Route knows the approximate road distance
 - A route could be duplicated
 - A duplicated Route could be added to the Trip
+- Trade-off: removed InternalIdentity value object
+- Fix: Date::input should be a DateTime
 
 Application
 ========================
@@ -30,3 +32,5 @@ Infrastructure
 ========================
 
 - Framework's revenge: Symfony 2.5 and Doctrine 2.5
+- InfrastructureBundle
+- Mapping entities and value objects ... ops, Doctrine seems not work with a Value Object (with strategy auto) as identity for another entity

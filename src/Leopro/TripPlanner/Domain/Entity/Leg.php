@@ -3,7 +3,6 @@
 namespace Leopro\TripPlanner\Domain\Entity;
 
 use Leopro\TripPlanner\Domain\ValueObject\Date;
-use Leopro\TripPlanner\Domain\ValueObject\InternalIdentity;
 
 class Leg
 {
@@ -11,11 +10,9 @@ class Leg
     private $date;
     private $location;
 
-    private function __construct(InternalIdentity $internalIdentity,
-                                 Date $date,
+    private function __construct(Date $date,
                                  Location $location)
     {
-        $this->internalIdentity = $internalIdentity;
         $this->date = $date;
         $this->location = $location;
     }
@@ -24,7 +21,6 @@ class Leg
     {
         $date = new Date($date, $dateFormat);
         return new self(
-            new InternalIdentity,
             $date,
             Location::create($date->getFormattedDate(), $latitude, $longitude)
         );

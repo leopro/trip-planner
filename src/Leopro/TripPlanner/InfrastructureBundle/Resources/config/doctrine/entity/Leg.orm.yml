@@ -1,0 +1,18 @@
+Leopro\TripPlanner\Domain\Entity\Leg:
+    type: entity
+    table: leg
+    id:
+        internalIdentity:
+          type: integer
+          generator:
+            strategy: AUTO
+    embedded:
+        date:
+            class: Leopro\TripPlanner\Domain\ValueObject\Date
+    oneToOne:
+        location:
+            targetEntity: Leopro\TripPlanner\Domain\Entity\Location
+            joinColumn:
+                name: internalIdentity
+                referencedColumnName: internalIdentity
+            cascade: ["persist"]

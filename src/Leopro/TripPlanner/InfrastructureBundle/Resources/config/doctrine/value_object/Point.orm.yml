@@ -1,0 +1,9 @@
+Leopro\TripPlanner\Domain\ValueObject\Point:
+    type: embeddable
+    fields:
+        latitude:
+            type: string
+            length: 50
+        longitude:
+            type: string
+            length: 50

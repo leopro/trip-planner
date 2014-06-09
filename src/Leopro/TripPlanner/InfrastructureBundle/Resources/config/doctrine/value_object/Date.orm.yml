@@ -1,0 +1,8 @@
+Leopro\TripPlanner\Domain\ValueObject\Date:
+    type: embeddable
+    fields:
+        input:
+            type: date
+        format:
+            type: string
+            length: 10

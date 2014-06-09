@@ -1,0 +1,22 @@
+Leopro\TripPlanner\Domain\Entity\Trip:
+    type: entity
+    table: trip
+    embedded:
+        identity:
+          class: Leopro\TripPlanner\Domain\ValueObject\TripIdentity
+    fields:
+        name:
+            type: string
+            length: 250
+    manyToMany:
+        routes:
+            targetEntity: Leopro\TripPlanner\Domain\Entity\Route
+            joinTable:
+              name: trip_routes
+              joinColumns:
+                link_id:
+                  referencedColumnName: identity_id
+              inverseJoinColumns:
+                report_id:
+                  referencedColumnName: internalIdentity
+            cascade: ["persist"]

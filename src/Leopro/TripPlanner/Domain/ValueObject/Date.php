@@ -9,7 +9,7 @@ class Date
 
     public function __construct($input, $format = 'Y-m-d')
     {
-        $this->input = $input;
+        $this->input = \DateTime::createFromFormat($format, $input);
         $this->format = $format;
     }
 
@@ -19,9 +19,6 @@ class Date
             $format = $this->format;
         }
 
-        $date = \DateTime::createFromFormat($this->format, $this->input);
-        $formattedDate = $date->format($format);
-
-        return $formattedDate;
+        return $this->input->format($format);
     }
 } 

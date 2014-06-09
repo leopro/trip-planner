@@ -1,0 +1,6 @@
+Leopro\TripPlanner\Domain\ValueObject\TripIdentity:
+    type: embeddable
+    id:
+        id:
+            type: string
+            length: 13

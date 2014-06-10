@@ -1,6 +1,13 @@
 Trip Planner
 ========================
 
+A sample code for a DDD application.
+It's not a complete code ready for production, but it's working.
+You can follow the building steps, starting from first commit.
+
+The purpose: planning a trip, choosing a leg for every date and a location for every leg.
+
+
 Domain
 ========================
 

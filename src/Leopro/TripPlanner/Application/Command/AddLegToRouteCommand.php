@@ -42,4 +42,52 @@ class AddLegToRouteCommand implements Command
             )
         );
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateFormat()
+    {
+        return $this->dateFormat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRouteIdentity()
+    {
+        return $this->routeIdentity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTripIdentity()
+    {
+        return $this->tripIdentity;
+    }
 } 

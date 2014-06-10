@@ -19,7 +19,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 
-            new \Leopro\TripPlanner\InfrastructureBundle\InfrastructureBundle()
+            new \Leopro\TripPlanner\InfrastructureBundle\InfrastructureBundle(),
+            new \Leopro\TripPlanner\PresentationBundle\PresentationBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,0 +1,4 @@
+api:
+    resource: "@PresentationBundle/Controller"
+    prefix: /
+    type: annotation

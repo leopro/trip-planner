@@ -30,4 +30,28 @@ class UpdateLocationCommand implements Command
             )
         );
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRouteIdentity()
+    {
+        return $this->routeIdentity;
+    }
 } 

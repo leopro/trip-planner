@@ -22,4 +22,12 @@ class CreateTripCommand implements Command
             )
         );
     }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 } 

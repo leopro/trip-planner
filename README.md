@@ -16,6 +16,7 @@ Domain
 - Trade-off: removed InternalIdentity value object
 - Fix: Date::input should be a DateTime
 - Trade-off: we need a custom Event Dispatcher
+- Trade-off: getters on commands, for integration with form
 
 Application
 ========================
@@ -36,3 +37,10 @@ Infrastructure
 - InfrastructureBundle
 - Mapping entities and value objects ... ops, Doctrine seems not work with a Value Object (with strategy auto) as identity for another entity
 - Configuring services and creating Infrastructure services: Repository, Adapter for Validator, Validation ... ops, the Symfony's dispatcher does not fit
+
+
+Presentation
+========================
+
+- A simple controller with a form
+- Symfony2 Form requires getters for the mapped entity

@@ -1,0 +1,3 @@
+api:
+    resource: "@PresentationBundle/Resources/config/routing.yml"
+    prefix:   /

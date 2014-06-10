@@ -4,11 +4,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="infrastructure.trip_repository.doctrine.class">Leopro\TripPlanner\InfrastructureBundle\Repository\TripRepository</parameter>
-        <parameter key="infrastructure.validator.class">Leopro\TripPlanner\InfrastructureBundle\Adapter\Validator</parameter>
         <parameter key="application.event_dispatcher.class">Leopro\TripPlanner\Application\Event\EventDispatcher</parameter>
         <parameter key="application.command_handler.class">Leopro\TripPlanner\Application\Command\CommandHandler</parameter>
         <parameter key="infrastructure.event_dispatcher_adapter.class">Leopro\TripPlanner\InfrastructureBundle\Adapter\EventDispatcher</parameter>
+        <parameter key="infrastructure.trip_repository.doctrine.class">Leopro\TripPlanner\InfrastructureBundle\Repository\TripRepository</parameter>
+        <parameter key="infrastructure.validator.class">Leopro\TripPlanner\InfrastructureBundle\Adapter\Validator</parameter>
     </parameters>
 
     <services>
@@ -40,7 +40,7 @@
             <tag name="use_case" />
         </service>
 
-        <!-- Adapter -->
+        <!-- Adapters -->
         <service id="infrastructure.validator" public="false" class="%infrastructure.validator.class%">
             <argument type="service" id="validator"/>
         </service>
